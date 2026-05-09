@@ -1,0 +1,592 @@
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --ink:#0f0f13;
+  --ink2:#1c1c24;
+  --ink3:#26263a;
+  --surface:#ffffff;
+  --surface2:#f7f7fb;
+  --surface3:#f0f0f8;
+  --blue:#4361ee;
+  --blue-light:#eef0fd;
+  --blue-mid:#7b8cef;
+  --violet:#7c3aed;
+  --violet-light:#f3effe;
+  --teal:#0d9488;
+  --teal-light:#edfaf8;
+  --amber:#d97706;
+  --amber-light:#fffbeb;
+  --red:#e11d48;
+  --text:#0f0f13;
+  --text2:#4a4a6a;
+  --text3:#9898b8;
+  --border:#e4e4f0;
+  --border2:#cecee8;
+  --mono:'JetBrains Mono',monospace;
+  --sans:'Sora',sans-serif;
+  --ease:cubic-bezier(0.22,1,0.36,1);
+}
+
+body{font-family:var(--sans);background:var(--surface);color:var(--text);font-size:15px;line-height:1.7;overflow-x:hidden}
+
+/* ANIMATED BG ORBS */
+.bg-orbs{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:0}
+.orb{position:absolute;border-radius:50%;filter:blur(80px);opacity:0.18;animation:drift 12s ease-in-out infinite}
+.orb1{width:600px;height:600px;background:#4361ee;top:-200px;left:-100px;animation-delay:0s}
+.orb2{width:400px;height:400px;background:#7c3aed;top:100px;right:-100px;animation-delay:-4s}
+.orb3{width:300px;height:300px;background:#0d9488;bottom:-80px;left:200px;animation-delay:-8s}
+@keyframes drift{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(30px,-20px) scale(1.05)}66%{transform:translate(-20px,25px) scale(0.97)}}
+
+/* NAVIGATION */
+nav{background:rgba(255,255,255,0.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:0 3rem;height:60px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+.nav-brand{font-family:var(--mono);font-size:13px;font-weight:500;color:var(--blue);letter-spacing:1px}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{font-size:12px;font-weight:600;color:var(--text2);text-decoration:none;letter-spacing:0.5px;text-transform:uppercase;transition:color 0.2s}
+.nav-links a:hover{color:var(--blue)}
+
+/* SECTIONS */
+.wrap{max-width:1080px;margin:0 auto;padding:0 2.5rem}
+
+/* HERO */
+.hero{position:relative;min-height:92vh;display:flex;align-items:center;overflow:hidden;background:linear-gradient(135deg,#f8f8ff 0%,#eef0fd 50%,#f3effe 100%)}
+.hero-inner{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;padding:6rem 4rem}
+.hero-left{animation:slideUp 0.8s var(--ease) both}
+.hero-right{animation:slideUp 0.8s var(--ease) 0.2s both}
+@keyframes slideUp{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:translateY(0)}}
+
+.hero-eyebrow{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11px;font-weight:500;color:var(--blue);letter-spacing:2px;text-transform:uppercase;background:var(--blue-light);border:1px solid #c7ccf9;border-radius:100px;padding:5px 14px;margin-bottom:1.25rem}
+.hero-dot{width:6px;height:6px;background:#22c55e;border-radius:50%;animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.5;transform:scale(0.8)}}
+
+.hero h1{font-size:clamp(2.8rem,5vw,4.2rem);font-weight:700;line-height:1.05;letter-spacing:-2px;color:var(--ink);margin-bottom:0.5rem}
+.hero h1 em{font-style:normal;color:var(--blue)}
+.hero-role{font-family:var(--mono);font-size:13px;color:var(--text2);letter-spacing:1px;margin-bottom:1.25rem}
+.hero-desc{font-size:15px;color:var(--text2);line-height:1.8;max-width:480px;margin-bottom:2rem}
+
+/* TOP 2% CARD */
+.rank-card{background:var(--ink);border-radius:16px;padding:1.25rem 1.5rem;color:white;margin-bottom:1.5rem;position:relative;overflow:hidden;animation:slideUp 0.8s var(--ease) 0.4s both}
+.rank-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(67,97,238,0.5),rgba(124,58,237,0.4));border-radius:16px}
+.rank-card-inner{position:relative;z-index:1}
+.rank-label{font-family:var(--mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-bottom:6px}
+.rank-value{font-size:2.4rem;font-weight:700;color:white;line-height:1;letter-spacing:-1px}
+.rank-value span{color:#fbbf24}
+.rank-sub{font-size:12px;color:rgba(255,255,255,0.6);margin-top:4px}
+.rank-badge{position:absolute;top:1rem;right:1rem;background:rgba(251,191,36,0.15);border:1px solid rgba(251,191,36,0.3);border-radius:8px;padding:4px 10px;font-family:var(--mono);font-size:10px;color:#fbbf24;letter-spacing:1px}
+
+.hero-ctas{display:flex;gap:12px;flex-wrap:wrap}
+.btn-fill{display:inline-flex;align-items:center;gap:8px;background:var(--blue);color:white;padding:12px 24px;border-radius:10px;font-weight:600;font-size:13px;text-decoration:none;transition:all 0.25s var(--ease);border:none;cursor:pointer}
+.btn-fill:hover{background:#3451d1;transform:translateY(-2px)}
+.btn-outline{display:inline-flex;align-items:center;gap:8px;background:transparent;color:var(--blue);padding:12px 24px;border-radius:10px;font-weight:600;font-size:13px;text-decoration:none;transition:all 0.25s var(--ease);border:1.5px solid var(--border2)}
+.btn-outline:hover{border-color:var(--blue);background:var(--blue-light);transform:translateY(-2px)}
+
+/* HERO RIGHT — STATS CARD */
+.hero-stats-panel{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:2rem;animation:slideUp 0.8s var(--ease) 0.3s both}
+.stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border)}
+.stat-cell{background:var(--surface);padding:1.25rem 1rem;text-align:center}
+.stat-cell:first-child{border-radius:8px 0 0 0}
+.stat-cell:nth-child(2){border-radius:0 8px 0 0}
+.stat-cell:nth-child(3){border-radius:0 0 0 8px}
+.stat-cell:last-child{border-radius:0 0 8px 0}
+.stat-n{font-size:1.8rem;font-weight:700;color:var(--blue);letter-spacing:-1px;line-height:1}
+.stat-n.violet{color:var(--violet)}
+.stat-n.teal{color:var(--teal)}
+.stat-n.amber{color:var(--amber)}
+.stat-lbl{font-size:11px;color:var(--text3);font-weight:600;margin-top:4px;letter-spacing:0.5px}
+.panel-footer{border-top:1px solid var(--border);margin-top:1rem;padding-top:1rem;display:flex;flex-direction:column;gap:8px}
+.tool-tag{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:11px;color:var(--text2);background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:4px 10px}
+.tool-dot{width:6px;height:6px;border-radius:50%}
+.tools-row{display:flex;flex-wrap:wrap;gap:6px}
+
+/* SECTION BASE */
+.section{padding:6rem 0}
+.section-alt{background:var(--surface2)}
+.sec-eyebrow{font-family:var(--mono);font-size:10px;font-weight:500;color:var(--blue);letter-spacing:3px;text-transform:uppercase;margin-bottom:0.5rem}
+.sec-title{font-size:2rem;font-weight:700;color:var(--ink);letter-spacing:-0.5px;margin-bottom:0.5rem}
+.sec-sub{font-size:15px;color:var(--text2);max-width:560px;line-height:1.7;margin-bottom:3rem}
+
+/* EXPERIENCE */
+.exp-grid{display:grid;gap:1.5rem}
+.exp-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:1.75rem;transition:all 0.3s var(--ease);position:relative;overflow:hidden}
+.exp-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--blue);border-radius:0;opacity:0;transition:opacity 0.3s}
+.exp-card:hover{border-color:var(--border2);transform:translateY(-2px)}
+.exp-card:hover::before{opacity:1}
+.exp-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:0.75rem;gap:1rem}
+.exp-role{font-size:1.05rem;font-weight:700;color:var(--ink)}
+.exp-period{font-family:var(--mono);font-size:11px;color:var(--text3);white-space:nowrap;background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:3px 10px}
+.exp-company{font-family:var(--mono);font-size:12px;color:var(--blue);margin-bottom:0.75rem}
+.exp-bullets{list-style:none}
+.exp-bullets li{font-size:14px;color:var(--text2);padding:3px 0 3px 1.1rem;position:relative;line-height:1.6}
+.exp-bullets li::before{content:'→';position:absolute;left:0;color:var(--blue);font-size:11px;top:5px}
+
+/* PROJECTS */
+.proj-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem}
+.proj-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:1.5rem;transition:all 0.35s var(--ease);cursor:default}
+.proj-card:hover{border-color:var(--blue-mid);transform:translateY(-4px);box-shadow:0 12px 40px rgba(67,97,238,0.1)}
+.proj-icon{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:1rem;font-size:20px}
+.proj-icon.blue{background:var(--blue-light)}
+.proj-icon.violet{background:var(--violet-light)}
+.proj-icon.teal{background:var(--teal-light)}
+.proj-icon.amber{background:var(--amber-light)}
+.proj-title{font-size:15px;font-weight:700;color:var(--ink);line-height:1.3;margin-bottom:0.5rem}
+.proj-desc{font-size:13px;color:var(--text2);line-height:1.7;margin-bottom:1rem}
+.tag-row{display:flex;flex-wrap:wrap;gap:5px}
+.tag{font-family:var(--mono);font-size:10px;font-weight:500;padding:3px 8px;border-radius:5px;letter-spacing:0.5px}
+.tag.blue{background:var(--blue-light);color:#3451d1}
+.tag.violet{background:var(--violet-light);color:#6d28d9}
+.tag.teal{background:var(--teal-light);color:#0f766e}
+.tag.amber{background:var(--amber-light);color:#b45309}
+.tag.red{background:#fff1f2;color:#be123c}
+
+/* SKILLS */
+.skill-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem}
+.skill-col{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:1.5rem}
+.skill-col-title{font-size:12px;font-weight:700;color:var(--ink);letter-spacing:0.5px;margin-bottom:1.25rem;padding-bottom:0.75rem;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px}
+.skill-col-icon{font-size:16px}
+.skill-row{margin-bottom:12px}
+.skill-name{font-size:13px;color:var(--text2);margin-bottom:5px;display:flex;justify-content:space-between}
+.skill-pct{font-family:var(--mono);font-size:11px;color:var(--text3)}
+.skill-track{height:4px;background:var(--border);border-radius:4px;overflow:hidden}
+.skill-bar{height:100%;border-radius:4px;width:0;transition:width 1.2s var(--ease)}
+.sb-blue{background:var(--blue)}
+.sb-violet{background:var(--violet)}
+.sb-teal{background:var(--teal)}
+
+/* CERTIFICATIONS */
+.cert-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+.cert-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:1.25rem 1rem;text-align:center;transition:all 0.3s var(--ease)}
+.cert-card:hover{border-color:var(--border2);transform:translateY(-3px)}
+.cert-card.active{border-color:#bbf7d0;background:#f0fdf4}
+.cert-card.progress{border-color:#fde68a;background:#fffbeb}
+.cert-emoji{font-size:28px;margin-bottom:0.5rem;display:block}
+.cert-name{font-size:13px;font-weight:700;color:var(--ink);line-height:1.4;margin-bottom:4px}
+.cert-org{font-family:var(--mono);font-size:10px;color:var(--text3)}
+.cert-status{display:inline-block;margin-top:8px;font-size:10px;font-weight:600;padding:3px 8px;border-radius:5px;letter-spacing:0.5px}
+.cert-status.done{background:#dcfce7;color:#166534}
+.cert-status.wip{background:#fef3c7;color:#92400e}
+
+/* CONTACT */
+.contact-wrap{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start}
+.contact-heading{font-size:2rem;font-weight:700;color:var(--ink);letter-spacing:-0.5px;margin-bottom:0.5rem}
+.contact-sub{font-size:15px;color:var(--text2);line-height:1.7;margin-bottom:2rem}
+.contact-items{display:flex;flex-direction:column;gap:1rem}
+.contact-item{display:flex;align-items:center;gap:14px;padding:1rem 1.25rem;background:var(--surface2);border:1px solid var(--border);border-radius:12px;text-decoration:none;transition:all 0.25s var(--ease)}
+.contact-item:hover{border-color:var(--blue-mid);background:var(--blue-light);transform:translateX(4px)}
+.contact-item-icon{width:36px;height:36px;border-radius:10px;background:var(--blue-light);border:1px solid #c7ccf9;display:flex;align-items:center;justify-content:center;font-size:16px;color:var(--blue);flex-shrink:0}
+.contact-item-label{font-size:11px;color:var(--text3);font-weight:600;letter-spacing:0.5px;text-transform:uppercase;font-family:var(--mono)}
+.contact-item-val{font-size:14px;color:var(--ink);font-weight:500}
+
+/* TERMINAL CARD */
+.terminal{background:var(--ink);border-radius:16px;overflow:hidden}
+.term-titlebar{background:var(--ink2);padding:12px 16px;display:flex;align-items:center;gap:8px}
+.tdot{width:11px;height:11px;border-radius:50%}
+.term-name{font-family:var(--mono);font-size:11px;color:#6b7280;margin-left:8px}
+.term-body{padding:1.5rem;font-family:var(--mono);font-size:13px;line-height:2}
+.tp{color:#6ee7b7}
+.tc{color:#e2e8f0}
+.tval{color:#fbbf24}
+.thi{color:#93c5fd}
+.tdim{color:#4b5563}
+.tcursor{display:inline-block;width:8px;height:14px;background:#6ee7b7;vertical-align:middle;animation:blink 1.1s step-end infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+
+/* FOOTER */
+footer{background:var(--ink);color:rgba(255,255,255,0.4);padding:2.5rem 4rem;display:flex;justify-content:space-between;align-items:center;font-family:var(--mono);font-size:12px}
+footer span.hi{color:var(--blue-mid)}
+
+/* REVEAL ANIMATION */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity 0.7s var(--ease),transform 0.7s var(--ease)}
+.reveal.visible{opacity:1;transform:none}
+.reveal-delay-1{transition-delay:0.1s}
+.reveal-delay-2{transition-delay:0.2s}
+.reveal-delay-3{transition-delay:0.3s}
+
+@media(max-width:720px){
+  .hero-inner,.proj-grid,.skill-cols,.cert-grid,.contact-wrap{grid-template-columns:1fr}
+  .hero-inner{padding:4rem 1.5rem}
+  nav{padding:0 1.25rem}
+  .wrap{padding:0 1.25rem}
+  footer{padding:1.5rem;flex-direction:column;gap:0.5rem;text-align:center}
+}
+</style>
+
+<h2 class="sr-only" style="position:absolute;left:-9999px">Aadithiyan R — Cybersecurity Portfolio: GRC Analyst, SOC Analyst, VAPT specialist, TryHackMe Top 2% globally</h2>
+
+<nav>
+  <div class="nav-brand">Aadithiyan_r</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="hero" id="about">
+  <div class="bg-orbs">
+    <div class="orb orb1"></div>
+    <div class="orb orb2"></div>
+    <div class="orb orb3"></div>
+  </div>
+  <div class="hero-inner wrap" style="max-width:1080px;margin:0 auto;padding:6rem 2.5rem">
+    <div class="hero-left">
+      <div class="hero-eyebrow">
+        <div class="hero-dot"></div>
+        Open to opportunities
+      </div>
+      <h1>Aadithiyan<br><em>RAMESH</em></h1>
+      <div class="hero-role">GRC Analyst &nbsp;·&nbsp; SOC Analyst &nbsp;·&nbsp; VAPT </div>
+      <p class="hero-desc">Aspiring Information Security & Compliance Executive with hands-on experience in ISO 27001 ISMS, SIEM-based threat monitoring, vulnerability assessment, and incident response.</p>
+
+      <div class="rank-card">
+        <div class="rank-card-inner">
+          <div class="rank-label">TryHackMe Global Ranking</div>
+          <div class="rank-value"><span>Top 2%</span> Worldwide</div>
+          <div class="rank-sub">SOC Analyst L1 Certified &nbsp;·&nbsp; Ranked among the best globally</div>
+        </div>
+        <div class="rank-badge">🏆 Elite</div>
+      </div>
+
+      <div class="hero-ctas">
+        <a href="#projects" class="btn-fill">
+          <i class="ti ti-folder" aria-hidden="true"></i> View Projects
+        </a>
+        <a href="#contact" class="btn-outline">
+          <i class="ti ti-mail" aria-hidden="true"></i> Contact Me
+        </a>
+      </div>
+    </div>
+
+    <div class="hero-right">
+      <div class="hero-stats-panel">
+        <div class="stat-grid">
+          <div class="stat-cell">
+            <div class="stat-n">2%</div>
+            <div class="stat-lbl">TryHackMe Rank</div>
+          </div>
+          <div class="stat-cell">
+            <div class="stat-n violet">8.7</div>
+            <div class="stat-lbl">CGPA — CSE</div>
+          </div>
+          <div class="stat-cell">
+            <div class="stat-n teal">4+</div>
+            <div class="stat-lbl">Security Projects</div>
+          </div>
+          <div class="stat-cell">
+            <div class="stat-n amber">ISO</div>
+            <div class="stat-lbl">27001 · 20000 · 9001</div>
+          </div>
+        </div>
+        <div class="panel-footer">
+          <div style="font-size:11px;color:var(--text3);font-weight:600;letter-spacing:0.5px;text-transform:uppercase;font-family:var(--mono)">Core Tools</div>
+          <div class="tools-row">
+            <span class="tool-tag"><span class="tool-dot" style="background:#4361ee"></span>Wazuh SIEM</span>
+            <span class="tool-tag"><span class="tool-dot" style="background:#7c3aed"></span>Splunk</span>
+            <span class="tool-tag"><span class="tool-dot" style="background:#0d9488"></span>Burp Suite</span>
+            <span class="tool-tag"><span class="tool-dot" style="background:#d97706"></span>Nessus</span>
+            <span class="tool-tag"><span class="tool-dot" style="background:#e11d48"></span>Metasploit</span>
+            <span class="tool-tag"><span class="tool-dot" style="background:#4361ee"></span>BloodHound</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- EXPERIENCE -->
+<div class="section" id="experience">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="sec-eyebrow">02 — Experience</div>
+      <div class="sec-title">Where I've worked</div>
+      <div class="sec-sub">Hands-on internships across SOC operations, GRC, and penetration testing — building real-world security skills.</div>
+    </div>
+    <div class="exp-grid">
+      <div class="exp-card reveal reveal-delay-1">
+        <div class="exp-header">
+          <div>
+            <div class="exp-role">security Analyst Trainee</div>
+            <div class="exp-company">Redteam Hacker Academy, Chennai (CICSA)</div>
+          </div>
+          <span class="exp-period">Jan 2026 — Present</span>
+        </div>
+        <ul class="exp-bullets">
+          <li>Hands-on training in SOC operations and Penetration Testing through the CICSA program.</li>
+          <li>Actively preparing for CEH V13 and CEH Masters certifications.</li>
+          <li>Identified and reported Broken Access Control and IDOR vulnerabilities through structured vulnerability assessments.</li>
+        </ul>
+      </div>
+      <div class="exp-card reveal reveal-delay-2">
+        <div class="exp-header">
+          <div>
+            <div class="exp-role">Junior SOC Analyst Intern</div>
+            <div class="exp-company">Razz Security IT Services LLP, Bangalore</div>
+          </div>
+          <span class="exp-period">Aug 2025 — Sep 2025</span>
+        </div>
+        <ul class="exp-bullets">
+          <li>Monitored security alerts and performed log analysis using SIEM tools to detect and investigate potential incidents.</li>
+          <li>Assisted in incident triage, vulnerability analysis, and threat monitoring.</li>
+          <li>Documented security findings, reports, and published technical blog posts.</li>
+        </ul>
+      </div>
+      <div class="exp-card reveal reveal-delay-3">
+        <div class="exp-header">
+          <div>
+            <div class="exp-role">Chapter Lead — Ethical Hacking & Cybersecurity Club</div>
+            <div class="exp-company">Google Developer Groups On Campus, PEC Tiruvallur</div>
+          </div>
+          <span class="exp-period">Aug 2024 — Apr 2025</span>
+        </div>
+        <ul class="exp-bullets">
+          <li>Organized security awareness sessions and coordinated chapter activities.</li>
+          <li>Developed cross-functional communication and documentation skills applicable to audit and compliance environments.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PROJECTS -->
+<div class="section section-alt" id="projects">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="sec-eyebrow">03 — Projects</div>
+      <div class="sec-title">What I've built</div>
+      <div class="sec-sub">Security-focused projects spanning SIEM, VAPT, and GRC — each aligned with ISO 27001 best practices.</div>
+    </div>
+    <div class="proj-grid">
+      <div class="proj-card reveal reveal-delay-1">
+        <div class="proj-icon blue"><i class="ti ti-radar" aria-hidden="true" style="color:#4361ee"></i></div>
+        <div class="proj-title">Wazuh SIEM Threat Detection & Automated Incident Response</div>
+        <p class="proj-desc">Implemented ISO 27001 Annex A controls including File Integrity Monitoring (A.12), automated incident response (A.16), VirusTotal integration, and MITRE ATT&CK mapping. Maintained an audit evidence repository for ISMS surveillance.</p>
+        <div class="tag-row">
+          <span class="tag blue">SIEM</span>
+          <span class="tag blue">SOAR</span>
+          <span class="tag violet">ISO 27001</span>
+          <span class="tag teal">Wazuh</span>
+          <span class="tag teal">MITRE ATT&CK</span>
+        </div>
+      </div>
+      <div class="proj-card reveal reveal-delay-2">
+        <div class="proj-icon violet"><i class="ti ti-shield-lock" aria-hidden="true" style="color:#7c3aed"></i></div>
+        <div class="proj-title">SafeLine WAF Deployment for Web Application Security Testing</div>
+        <p class="proj-desc">Deployed SafeLine WAF and conducted controlled attack simulations (SQLi, XSS, Command Injection) against DVWA. Documented findings as a formal risk assessment report with non-conformities and compensating controls.</p>
+        <div class="tag-row">
+          <span class="tag violet">WAF</span>
+          <span class="tag violet">VAPT</span>
+          <span class="tag red">XSS</span>
+          <span class="tag red">SQLi</span>
+          <span class="tag amber">Risk Assessment</span>
+        </div>
+      </div>
+      <div class="proj-card reveal reveal-delay-1">
+        <div class="proj-icon teal"><i class="ti ti-network" aria-hidden="true" style="color:#0d9488"></i></div>
+        <div class="proj-title">Enterprise Attack Surface & Chaining Vulnerability Assessment</div>
+        <p class="proj-desc">Analyzed enterprise Active Directory environments to identify attack paths and chained vulnerabilities. Updated asset inventory and risk register directly supporting ISO 27001 risk assessment and treatment activities.</p>
+        <div class="tag-row">
+          <span class="tag teal">Active Directory</span>
+          <span class="tag teal">BloodHound</span>
+          <span class="tag violet">ISO 27001</span>
+          <span class="tag blue">Attack Surface</span>
+        </div>
+      </div>
+      <div class="proj-card reveal reveal-delay-2">
+        <div class="proj-icon amber"><i class="ti ti-flag" aria-hidden="true" style="color:#d97706"></i></div>
+        <div class="proj-title">TryHackMe Custom CTF Room Creation</div>
+        <p class="proj-desc"><strong style="color:var(--blue)">MiniWebCTF</strong> — enumeration, auth testing, file upload, RCE, and privilege escalation. <strong style="color:var(--teal)">StegoCTF</strong> — steganography, password cracking, SSH access, and a realistic root chain.</p>
+        <div class="tag-row">
+          <span class="tag amber">CTF Design</span>
+          <span class="tag amber">TryHackMe</span>
+          <span class="tag red">Privilege Escalation</span>
+          <span class="tag blue">Steganography</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SKILLS -->
+<div class="section" id="skills">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="sec-eyebrow">04 — Skills</div>
+      <div class="sec-title">Technical expertise</div>
+      <div class="sec-sub">Spanning GRC, security operations, and penetration testing — backed by hands-on project experience.</div>
+    </div>
+    <div class="skill-cols">
+      <div class="skill-col reveal reveal-delay-1">
+        <div class="skill-col-title"><span class="skill-col-icon"><i class="ti ti-certificate" aria-hidden="true" style="font-size:16px;color:var(--blue)"></i></span> Compliance & GRC</div>
+        <div class="skill-row"><div class="skill-name">ISO 27001 ISMS<span class="skill-pct">90%</span></div><div class="skill-track"><div class="skill-bar sb-blue" data-w="90"></div></div></div>
+        <div class="skill-row"><div class="skill-name">Risk Register Mgmt<span class="skill-pct">85%</span></div><div class="skill-track"><div class="skill-bar sb-blue" data-w="85"></div></div></div>
+        <div class="skill-row"><div class="skill-name">ISO 20000 ITSM<span class="skill-pct">80%</span></div><div class="skill-track"><div class="skill-bar sb-blue" data-w="80"></div></div></div>
+        <div class="skill-row"><div class="skill-name">ISO 9001 QMS<span class="skill-pct">75%</span></div><div class="skill-track"><div class="skill-bar sb-blue" data-w="75"></div></div></div>
+        <div class="skill-row"><div class="skill-name">Internal Audit Support<span class="skill-pct">82%</span></div><div class="skill-track"><div class="skill-bar sb-blue" data-w="82"></div></div></div>
+      </div>
+      <div class="skill-col reveal reveal-delay-2">
+        <div class="skill-col-title"><span class="skill-col-icon"><i class="ti ti-eye" aria-hidden="true" style="font-size:16px;color:var(--violet)"></i></span> Security Operations</div>
+        <div class="skill-row"><div class="skill-name">Wazuh SIEM<span class="skill-pct">87%</span></div><div class="skill-track"><div class="skill-bar sb-violet" data-w="87"></div></div></div>
+        <div class="skill-row"><div class="skill-name">Splunk / ELK Stack<span class="skill-pct">75%</span></div><div class="skill-track"><div class="skill-bar sb-violet" data-w="75"></div></div></div>
+        <div class="skill-row"><div class="skill-name">Incident Response<span class="skill-pct">80%</span></div><div class="skill-track"><div class="skill-bar sb-violet" data-w="80"></div></div></div>
+        <div class="skill-row"><div class="skill-name">Threat Intelligence<span class="skill-pct">72%</span></div><div class="skill-track"><div class="skill-bar sb-violet" data-w="72"></div></div></div>
+        <div class="skill-row"><div class="skill-name">MITRE ATT&CK<span class="skill-pct">78%</span></div><div class="skill-track"><div class="skill-bar sb-violet" data-w="78"></div></div></div>
+      </div>
+      <div class="skill-col reveal reveal-delay-3">
+        <div class="skill-col-title"><span class="skill-col-icon"><i class="ti ti-terminal" aria-hidden="true" style="font-size:16px;color:var(--teal)"></i></span> Penetration Testing</div>
+        <div class="skill-row"><div class="skill-name">Nmap / Nessus<span class="skill-pct">85%</span></div><div class="skill-track"><div class="skill-bar sb-teal" data-w="85"></div></div></div>
+        <div class="skill-row"><div class="skill-name">Burp Suite<span class="skill-pct">80%</span></div><div class="skill-track"><div class="skill-bar sb-teal" data-w="80"></div></div></div>
+        <div class="skill-row"><div class="skill-name">Metasploit<span class="skill-pct">75%</span></div><div class="skill-track"><div class="skill-bar sb-teal" data-w="75"></div></div></div>
+        <div class="skill-row"><div class="skill-name">BloodHound / AD<span class="skill-pct">72%</span></div><div class="skill-track"><div class="skill-bar sb-teal" data-w="72"></div></div></div>
+        <div class="skill-row"><div class="skill-name">SQLmap / Hydra<span class="skill-pct">75%</span></div><div class="skill-track"><div class="skill-bar sb-teal" data-w="78"></div></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CERTS -->
+<div class="section section-alt">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="sec-eyebrow">05 — Certifications</div>
+      <div class="sec-title">Credentials</div>
+    </div>
+    <div class="cert-grid reveal reveal-delay-1">
+      <div class="cert-card active">
+        <span class="cert-emoji">🛡️</span>
+        <div class="cert-name">Cisco Certified Ethical Hacker</div>
+        <div class="cert-org">Cisco</div>
+        <span class="cert-status done">Completed</span>
+      </div>
+      <div class="cert-card active">
+        <span class="cert-emoji">🔐</span>
+        <div class="cert-name">CICSA — Certified IT Infrastructure & Cyber SOC Analyst</div>
+        <div class="cert-org">Redteam Hacker Academy</div>
+        <span class="cert-status done">Completed</span>
+      </div>
+      <div class="cert-card active">
+        <span class="cert-emoji">🎯</span>
+        <div class="cert-name">SOC Analyst L1</div>
+        <div class="cert-org">TryHackMe · Top 2% Global</div>
+        <span class="cert-status done">Completed</span>
+      </div>
+      <div class="cert-card progress">
+        <span class="cert-emoji">⚡</span>
+        <div class="cert-name">CEH V13</div>
+        <div class="cert-org">EC-Council</div>
+        <span class="cert-status wip">In Progress</span>
+      </div>
+      <div class="cert-card progress">
+        <span class="cert-emoji">🏅</span>
+        <div class="cert-name">CEH Master</div>
+        <div class="cert-org">EC-Council</div>
+        <span class="cert-status wip">In Progress</span>
+      </div>
+      <div class="cert-card active">
+        <span class="cert-emoji">🔬</span>
+        <div class="cert-name">SOC Monitoring & VAPT Security Labs</div>
+        <div class="cert-org">Hands-on Lab Completion</div>
+        <span class="cert-status done">Completed</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<div class="section" id="contact">
+  <div class="wrap">
+    <div class="contact-wrap">
+      <div class="reveal">
+        <div class="sec-eyebrow">06 — Contact</div>
+        <div class="contact-heading">Let's connect.</div>
+        <p class="contact-sub">Open to GRC Analyst, Junior SOC Analyst, and VAPT roles. Passionate about information security governance and compliance. Reach out anytime.</p>
+        <div class="contact-items">
+          <a href="mailto:rsraadithiyan2209@gmail.com" class="contact-item">
+            <div class="contact-item-icon"><i class="ti ti-mail" aria-hidden="true"></i></div>
+            <div><div class="contact-item-label">Email</div><div class="contact-item-val">rsraadithiyan2209@gmail.com</div></div>
+          </a>
+          <a href="tel:+917418082740" class="contact-item">
+            <div class="contact-item-icon"><i class="ti ti-phone" aria-hidden="true"></i></div>
+            <div><div class="contact-item-label">Phone</div><div class="contact-item-val">+91 74180 82740</div></div>
+          </a>
+          <a href="https://www.linkedin.com/in/aadithiyan-r-1052ab249/" class="contact-item">
+            <div class="contact-item-icon"><i class="ti ti-brand-linkedin" aria-hidden="true"></i></div>
+            <div><div class="contact-item-label">LinkedIn</div><div class="contact-item-val">https://www.linkedin.com/in/aadithiyan-r-1052ab249/</div></div>
+          </a>
+          <a href="https://github.com/soulaadithiyan" class="contact-item">
+            <div class="contact-item-icon"><i class="ti ti-brand-github" aria-hidden="true"></i></div>
+            <div><div class="contact-item-label">GitHub</div><div class="contact-item-val">https://github.com/soulaadithiyan</div></div>
+          </a>
+          <a href="https://tryhackme.com/p/AadithiyanR" class="contact-item">
+            <div class="contact-item-icon"><i class="ti ti-flag" aria-hidden="true"></i></div>
+            <div><div class="contact-item-label">TryHackMe</div><div class="contact-item-val">Top 2% Global · https://tryhackme.com/p/AadithiyanR</div></div>
+          </a>
+        </div>
+      </div>
+
+      <div class="reveal reveal-delay-2">
+        <div class="terminal">
+          <div class="term-titlebar">
+            <div class="tdot" style="background:#ff5f57"></div>
+            <div class="tdot" style="background:#febc2e"></div>
+            <div class="tdot" style="background:#28c840"></div>
+            <span class="term-name">aadithiyan@portfolio ~ zsh</span>
+          </div>
+          <div class="term-body">
+            <div><span class="tp">❯</span> <span class="tc">whoami</span></div>
+            <div style="padding-left:1rem;color:#6ee7b7">aadithiyan_r — GRC / SOC / VAPT</div>
+            <div><span class="tp">❯</span> <span class="tc">cat tryhackme_rank.txt</span></div>
+            <div style="padding-left:1rem"><span class="tval">🏆 TOP 2% GLOBALLY</span></div>
+            <div><span class="tp">❯</span> <span class="tc">grep iso skills.txt</span></div>
+            <div style="padding-left:1rem"><span class="thi">ISO 27001 · ISO 20000 · ISO 9001</span></div>
+            <div><span class="tp">❯</span> <span class="tc">ls certifications/</span></div>
+            <div style="padding-left:1rem;color:#9ca3af">cisco_ceh &nbsp; cicsa &nbsp; soc_l1_thm</div>
+            <div><span class="tp">❯</span> <span class="tc">cat availability.txt</span></div>
+            <div style="padding-left:1rem;color:#6ee7b7">● OPEN TO OPPORTUNITIES</div>
+            <div><span class="tp">❯</span> <span class="tcursor"></span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <span>© 2026 Aadithiyan R</span>
+  <span class="hi">GRC · SOC · VAPT</span>
+  <span>Built with care</span>
+</footer>
+
+<script>
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      if (e.target.classList.contains('skill-col') || e.target.closest('.skill-col')) {
+        const bars = e.target.querySelectorAll ? e.target.querySelectorAll('.skill-bar') : [];
+        bars.forEach(b => { b.style.width = b.dataset.w + '%'; });
+      }
+      io.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.15 });
+
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+document.querySelectorAll('.skill-col').forEach(col => {
+  const colIo = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.querySelectorAll('.skill-bar').forEach(b => {
+          setTimeout(() => { b.style.width = b.dataset.w + '%'; }, 200);
+        });
+        colIo.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.3 });
+  colIo.observe(col);
+});
+</script>
